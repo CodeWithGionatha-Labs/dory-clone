@@ -13,6 +13,7 @@
     "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
     "@prisma/client": "^5.17.0",
     "@radix-ui/react-aspect-ratio": "^1.1.0",
+    "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
@@ -22,6 +23,8 @@
     "prisma": "^5.17.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-spinners": "^0.14.1",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },

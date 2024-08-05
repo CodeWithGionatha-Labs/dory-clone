@@ -1,12 +1,19 @@
+import { AuthButtons } from "@/components/buttons/AuthButtons";
 import { GetStartedButton } from "@/components/buttons/GetStartedButton";
+import { AuthLoader } from "@/components/Loader";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { MessageCircleMore, Radio } from "lucide-react";
 import Image from "next/image";
+import { Suspense } from "react";
+
+export const dynamic = "force-dynamic";
 
 export default function LandingPage() {
   return (
     <main className="px-4 flex flex-col min-h-screen items-start bg-gradient-to-br from-[#e8f0ff] to-[#bad0ee] pb-20">
-      {/* TODO add navbar with user authentication */}
+      <Suspense fallback={<AuthLoader className="ml-auto mt-6" />}>
+        <AuthButtons className="ml-auto mt-6" />
+      </Suspense>
 
       <div className="relative mx-auto w-full flex flex-col items-center gap-y-8 mt-10 lg:mt-16">
         <Headline />
