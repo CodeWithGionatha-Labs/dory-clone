@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          String   @id @unique // this is the same id provided by Kinde
+  email       String   @unique
+  createdAt   DateTime @default(now())
+  displayName String   @db.VarChar(255)
+  color       String   @db.VarChar(255)
+}
