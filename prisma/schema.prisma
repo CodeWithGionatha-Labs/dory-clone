@@ -19,6 +19,7 @@ model User {
   questions      Question[]
   upvotes        QuestionUpVote[]
   pollVotes      PollVote[]
+  bookmarks      Event[]
 }
 
 model Event {
@@ -30,6 +31,7 @@ model Event {
   participants     EventParticipant[]
   questions        Question[]
   polls            Poll[]
+  bookmarkedBy     User[]
 
   owner   User   @relation("owner", fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ownerId String
