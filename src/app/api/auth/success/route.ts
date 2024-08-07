@@ -1,4 +1,4 @@
-import routes, { baseUrl } from "@/app/config/routes";
+import routes, { baseUrl } from "@/config/routes";
 import { prisma } from "@/lib/prisma/client";
 import { faker } from "@faker-js/faker";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

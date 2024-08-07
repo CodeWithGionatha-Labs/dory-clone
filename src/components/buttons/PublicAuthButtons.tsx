@@ -1,6 +1,6 @@
 "use client";
 
-import { baseUrl } from "@/app/config/routes";
+import { baseUrl } from "@/config/routes";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 import { usePathname } from "next/navigation";

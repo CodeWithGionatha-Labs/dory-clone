@@ -1,6 +1,6 @@
 "use client";
 
-import routes from "@/app/config/routes";
+import routes from "@/config/routes";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 import { BookMarked, Component, LogOut, Menu, User } from "lucide-react";

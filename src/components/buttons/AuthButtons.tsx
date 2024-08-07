@@ -1,4 +1,4 @@
-import routes from "@/app/config/routes";
+import routes from "@/config/routes";
 import { getUserInfo } from "@/lib/server/get-user-info";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

@@ -1,3 +1,4 @@
+import routes from "@/config/routes";
 import { EventDetail } from "@/lib/prisma/validators/event-validators";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { Users } from "lucide-react";
@@ -14,7 +15,13 @@ export const EventCard = ({ event, className }: Props) => {
   const participantsCount = event._count.participants;
 
   return (
-    <Link href={"#"} prefetch={false}>
+    <Link
+      href={routes.event({
+        eventSlug: event.slug,
+        ownerId: event.ownerId,
+      })}
+      prefetch={false}
+    >
       <Card
         className={cn(
           "rounded-none border-l-[4px] border-b-0 border-t-0 border-r-0 border-gray-400/80",
