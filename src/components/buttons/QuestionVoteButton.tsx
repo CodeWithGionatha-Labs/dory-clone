@@ -1,6 +1,5 @@
 "use client";
 
-import routes from "@/config/routes";
 import { useVote } from "@/hooks/useQuestion";
 import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
@@ -39,12 +38,7 @@ export const QuestionVoteButton = ({
 
   if (!user) {
     return (
-      <RegisterLink
-        postLoginRedirectURL={`${routes.event({
-          ownerId,
-          eventSlug,
-        })}`}
-      >
+      <RegisterLink>
         <button className={cn("flex flex-col items-center", className)}>
           <ThumbsUp size={24} />
           <span className="px-2 pt-1 text-sm">{totalVotes}</span>

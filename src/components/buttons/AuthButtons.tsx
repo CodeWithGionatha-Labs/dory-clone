@@ -10,7 +10,11 @@ import { PublicAuthButtons } from "./PublicAuthButtons";
 export const AuthButtons = async ({ className }: PropsWithClassName) => {
   const kindeUser = await getKindeServerSession().getUser();
 
+  console.log(kindeUser);
+
   const user = kindeUser && (await getUserInfo(kindeUser.id));
+
+  console.log(user);
 
   // TODO retrieve user notifications
 

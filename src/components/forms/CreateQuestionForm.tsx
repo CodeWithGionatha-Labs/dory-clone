@@ -1,4 +1,3 @@
-import routes, { baseUrl } from "@/config/routes";
 import { createQuestionAction } from "@/lib/actions/create-question-action";
 import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
 import { cn } from "@/lib/utils/ui-utils";
@@ -118,10 +117,6 @@ export const CreateQuestionForm = ({
                 className={cn(
                   buttonVariants({ variant: "default", size: "lg" })
                 )}
-                postLoginRedirectURL={`${baseUrl}${routes.event({
-                  ownerId,
-                  eventSlug,
-                })}`}
               >
                 <ChatBubbleIcon className="w-4 h-4 mr-2" />
 

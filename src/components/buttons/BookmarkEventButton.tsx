@@ -1,6 +1,5 @@
 "use client";
 
-import routes, { baseUrl } from "@/config/routes";
 import { useIsParticipantView } from "@/hooks/useIsParticipantView";
 import { EventDetail } from "@/lib/prisma/validators/event-validators";
 import {
@@ -73,12 +72,7 @@ export const BookmarkEventButton = ({ event }: Props) => {
 
   if (!user) {
     return (
-      <RegisterLink
-        postLoginRedirectURL={`${baseUrl}${routes.event({
-          ownerId: event.ownerId,
-          eventSlug: event.slug,
-        })}`}
-      >
+      <RegisterLink>
         <Button variant={"outline"} className="rounded-full">
           <Bookmark className="w-4 h-4" />
         </Button>

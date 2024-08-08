@@ -1,6 +1,5 @@
 "use client";
 
-import { baseUrl } from "@/config/routes";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 import { usePathname } from "next/navigation";
@@ -11,15 +10,11 @@ export const PublicAuthButtons = ({ className }: PropsWithClassName) => {
 
   return (
     <div className={cn("inline-flex items-center gap-x-3", className)}>
-      <LoginLink
-        postLoginRedirectURL={`${baseUrl}${pathname}`}
-        className={cn(buttonVariants({ variant: "secondary" }))}
-      >
+      <LoginLink className={cn(buttonVariants({ variant: "secondary" }))}>
         Sign In
       </LoginLink>
 
       <RegisterLink
-        postLoginRedirectURL={`${baseUrl}${pathname}`}
         className={cn(
           buttonVariants({ variant: "default" }),
           "ring-1 ring-white"
