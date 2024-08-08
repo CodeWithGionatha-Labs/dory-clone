@@ -115,7 +115,6 @@ export const QuestionOptionsMenu = ({
         open={openDeleteDialog}
         onOpenChange={setOpenDeleteDialog}
         questionId={questionId}
-        onSuccess={() => {}}
       />
     </>
   );
