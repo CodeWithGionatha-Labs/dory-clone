@@ -40,3 +40,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .error-msg {
+    @apply text-destructive text-xs;
+  }
+}
