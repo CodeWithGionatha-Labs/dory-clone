@@ -49,7 +49,29 @@ export const updateQuestionAction = actionClient
         },
         data: fields,
       }),
-      // TODO implement notification
+      // send a notifications to the questions author
+      ...[
+        fields.isResolved === true && question.authorId !== user.id
+          ? prisma.notification.create({
+              data: {
+                type: "QUESTION_RESOLVED",
+                questionId,
+                userId: question.authorId,
+                eventId: question.event.id,
+              },
+            })
+          : [],
+        fields.isPinned === true && question.authorId !== user.id
+          ? prisma.notification.create({
+              data: {
+                type: "QUESTION_PINNED",
+                questionId,
+                userId: question.authorId,
+                eventId: question.event.id,
+              },
+            })
+          : [],
+      ].flatMap((tr) => tr),
     ]);
 
     return {

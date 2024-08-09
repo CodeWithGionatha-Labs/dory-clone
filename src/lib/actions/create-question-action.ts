@@ -38,8 +38,18 @@ export const createQuestionAction = actionClient
           body,
           authorId: user.id,
           eventId: event.id,
-          // create the notification for the event owner, to notify him about a new question
-          // TODO
+          // send a notification to the event owner, to notify him about a new question
+          ...(event.ownerId !== user.id
+            ? {
+                notifications: {
+                  create: {
+                    type: "NEW_QUESTION",
+                    userId: event.ownerId,
+                    eventId: event.id,
+                  },
+                },
+              }
+            : {}),
         },
         ...questionDetail,
       }),

@@ -20,6 +20,35 @@ model User {
   upvotes        QuestionUpVote[]
   pollVotes      PollVote[]
   bookmarks      Event[]
+  notifications  Notification[]
+}
+
+enum NotificationType {
+  NEW_QUESTION
+  QUESTION_UPVOTE
+  QUESTION_RESOLVED
+  QUESTION_PINNED
+  POLL_CLOSED
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  createdAt DateTime         @default(now())
+  read      Boolean          @default(false)
+  seen      Boolean          @default(false)
+  type      NotificationType
+
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+
+  question   Question? @relation(fields: [questionId], references: [id])
+  questionId String?
+
+  poll   Poll?   @relation(fields: [pollId], references: [id])
+  pollId String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
 }
 
 model Event {
@@ -32,6 +61,7 @@ model Event {
   questions        Question[]
   polls            Poll[]
   bookmarkedBy     User[]
+  notifications    Notification[]
 
   owner   User   @relation("owner", fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ownerId String
@@ -51,12 +81,13 @@ model EventParticipant {
 }
 
 model Question {
-  id         String           @id @default(cuid())
-  createdAt  DateTime         @default(now())
-  body       String           @db.VarChar(2500)
-  isPinned   Boolean          @default(false)
-  isResolved Boolean          @default(false)
-  upvotes    QuestionUpVote[]
+  id            String           @id @default(cuid())
+  createdAt     DateTime         @default(now())
+  body          String           @db.VarChar(2500)
+  isPinned      Boolean          @default(false)
+  isResolved    Boolean          @default(false)
+  upvotes       QuestionUpVote[]
+  notifications Notification[]
 
   event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   eventId String
@@ -76,12 +107,13 @@ model QuestionUpVote {
 }
 
 model Poll {
-  id        String       @id @default(cuid())
-  createdAt DateTime     @default(now())
-  body      String       @db.VarChar(500)
-  isLive    Boolean      @default(true)
-  options   PollOption[]
-  votes     PollVote[]
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  body          String         @db.VarChar(500)
+  isLive        Boolean        @default(true)
+  options       PollOption[]
+  votes         PollVote[]
+  notifications Notification[]
 
   event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   eventId String

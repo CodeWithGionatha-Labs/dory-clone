@@ -50,7 +50,17 @@ export const closePollAction = actionClient
       },
       data: {
         isLive: false,
-        // TODO send notification to all the voters
+        notifications: {
+          createMany: {
+            data: poll.votes
+              .filter(({ authorId }) => authorId !== user.id)
+              .map(({ authorId }) => ({
+                type: "POLL_CLOSED",
+                userId: authorId,
+                eventId: poll.event.id,
+              })),
+          },
+        },
       },
     });
 
