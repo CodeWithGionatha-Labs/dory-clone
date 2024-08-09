@@ -1,6 +1,7 @@
 "use client";
 
 import { getEventOpenQuestionsAction } from "@/lib/actions/get-event-open-questions.action";
+import { getEventResolvedQuestionsAction } from "@/lib/actions/get-event-resolved-questions-action";
 import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
 import { QuestionsOrderBy } from "@/lib/utils/question-utils";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
@@ -96,7 +97,30 @@ export const ResolvedQuestionsList = ({
   className,
   questionId,
 }: Props) => {
-  // TODO infinite scrolling
+  const [questions, setQuestions] = useState(initialQuestions);
+
+  const searchParams = useSearchParams();
+
+  const { executeAsync } = useAction(getEventResolvedQuestionsAction);
+
+  const fetchMoreResolvedQuestions = useCallback(
+    async ({ cursor }: { cursor?: QuestionDetail["id"] }) => {
+      const newQuestions = await executeAsync({
+        cursor,
+        eventSlug,
+        ownerId,
+        orderBy,
+        questionId,
+      });
+
+      if (!newQuestions?.data || newQuestions.data.length === 0) {
+        return [];
+      }
+
+      return newQuestions.data;
+    },
+    [executeAsync, eventSlug, orderBy, ownerId, questionId]
+  );
 
   return (
     <div className={cn("space-y-8 pb-10", className)}>
@@ -107,9 +131,15 @@ export const ResolvedQuestionsList = ({
           </span>
         </NoContent>
       ) : (
-        initialQuestions.map((question) => (
-          <Question key={question.id} question={question} />
-        ))
+        <InfiniteScrollList<QuestionDetail>
+          key={`resolved-${searchParams.toString()}`}
+          items={questions}
+          setItems={setQuestions}
+          renderItem={(question) => (
+            <Question key={question.id} question={question} />
+          )}
+          fetchMore={fetchMoreResolvedQuestions}
+        />
       )}
     </div>
   );
