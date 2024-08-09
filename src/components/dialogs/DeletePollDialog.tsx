@@ -1,6 +1,8 @@
+import { deletePollAction } from "@/lib/actions/delete-poll-action";
 import { cn } from "@/lib/utils/ui-utils";
 import { Poll } from "@prisma/client";
 import { AlertDialogProps } from "@radix-ui/react-alert-dialog";
+import { useAction } from "next-safe-action/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +14,7 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { buttonVariants } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 type Props = {
   pollId: Poll["id"];
@@ -23,15 +26,33 @@ export const DeletePollDialog = ({
   onSuccess: handleSuccess,
   ...dialogProps
 }: Props) => {
-  // TODO implement server action
-  const isExecuting = false;
-  const isFieldDisabled = isExecuting;
+  const { execute, isExecuting } = useAction(deletePollAction, {
+    onError: (err) => {
+      console.error(err);
+
+      toast({
+        title: "Something went wrong.",
+        description: "Failed to delete the poll.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      handleSuccess?.();
+
+      toast({
+        title: "Your poll has been deleted!",
+        duration: 3000,
+      });
+    },
+  });
 
   const handleDelete = (evt: React.MouseEvent) => {
     evt.preventDefault();
 
-    // TODO implement server action
+    execute({ pollId });
   };
+
+  const isFieldDisabled = isExecuting;
 
   return (
     <AlertDialog {...dialogProps}>

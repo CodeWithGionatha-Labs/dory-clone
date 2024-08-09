@@ -1,6 +1,8 @@
+import { deleteEventAction } from "@/lib/actions/delete-event-action";
 import { cn } from "@/lib/utils/ui-utils";
 import { Event } from "@prisma/client";
 import { AlertDialogProps } from "@radix-ui/react-alert-dialog";
+import { useAction } from "next-safe-action/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,14 +14,45 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { buttonVariants } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 type Props = {
   eventId: Event["id"];
+  onSuccess?: () => void;
 } & AlertDialogProps;
 
-export const DeleteEventDialog = ({ eventId, ...dialogProps }: Props) => {
-  // TODO
-  const isFieldDisabled = false;
+export const DeleteEventDialog = ({
+  eventId,
+  onSuccess: handleSuccess,
+  ...dialogProps
+}: Props) => {
+  const { execute, isExecuting } = useAction(deleteEventAction, {
+    onError: (e) => {
+      console.error(e);
+
+      toast({
+        title: "Something went wrong.",
+        description: "Failed to delete the event.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      handleSuccess?.();
+
+      toast({
+        title: "Your event has been deleted!",
+        duration: 3000,
+      });
+    },
+  });
+
+  const handleDelete = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+
+    execute({ eventId });
+  };
+
+  const isFieldDisabled = isExecuting;
 
   return (
     <AlertDialog {...dialogProps}>
@@ -40,13 +73,12 @@ export const DeleteEventDialog = ({ eventId, ...dialogProps }: Props) => {
             Cancel
           </AlertDialogCancel>
 
-          {/* TODO */}
           <AlertDialogAction
             disabled={isFieldDisabled}
-            onClick={undefined} //TODO
+            onClick={handleDelete}
             className={cn(buttonVariants({ variant: "destructive" }))}
           >
-            Continue
+            {isExecuting ? "Deleting..." : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

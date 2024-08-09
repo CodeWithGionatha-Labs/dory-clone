@@ -7,6 +7,7 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Edit, Settings, Trash } from "lucide-react";
 import { useState } from "react";
 import { DeleteEventDialog } from "../dialogs/DeleteEventDialog";
+import { UpdateEventDialog } from "../dialogs/UpdateEventDialog";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -42,7 +43,10 @@ export const EventAdminMenu = ({ event, className }: Props) => {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="p-2 space-y-1">
-          <DropdownMenuItem className="text-sm">
+          <DropdownMenuItem
+            className="text-sm"
+            onSelect={() => setOpenUpdateDialog(true)}
+          >
             <Edit className="w-4 h-4 mr-2" />
             <span>Edit event</span>
           </DropdownMenuItem>
@@ -57,7 +61,14 @@ export const EventAdminMenu = ({ event, className }: Props) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* TODO: implement update dialog */}
+      {/* Dialogs*/}
+      <UpdateEventDialog
+        open={openUpdateDialog}
+        onOpenChange={setOpenUpdateDialog}
+        event={event}
+        onSuccess={() => setOpenUpdateDialog(false)}
+      />
+
       <DeleteEventDialog
         open={openDeleteDialog}
         onOpenChange={setOpenDeleteDialog}

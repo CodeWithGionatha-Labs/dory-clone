@@ -1,6 +1,8 @@
+import { closePollAction } from "@/lib/actions/close-poll-action";
 import { cn } from "@/lib/utils/ui-utils";
 import { Poll } from "@prisma/client";
 import { AlertDialogProps } from "@radix-ui/react-alert-dialog";
+import { useAction } from "next-safe-action/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,6 +14,7 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { buttonVariants } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 type Props = {
   pollId: Poll["id"];
@@ -23,15 +26,30 @@ export const ClosePollDialog = ({
   onSuccess: handleSuccess,
   ...dialogProps
 }: Props) => {
-  // TODO implement server action
-  const isExecuting = false;
-  const isFieldDisabled = isExecuting;
+  const { execute, isExecuting } = useAction(closePollAction, {
+    onError: (err) => {
+      console.error(err);
+
+      toast({
+        title: "Something went wrong",
+        description: "Failed closing the poll. Please retry again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      handleSuccess?.();
+
+      toast({ title: "Your poll has been closed!" });
+    },
+  });
 
   const handleClose = (evt: React.MouseEvent) => {
     evt.preventDefault();
 
-    // TODO implement server action
+    execute({ pollId });
   };
+
+  const isFieldDisabled = isExecuting;
 
   return (
     <AlertDialog {...dialogProps}>

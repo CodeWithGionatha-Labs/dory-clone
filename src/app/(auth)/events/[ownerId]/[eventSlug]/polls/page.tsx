@@ -1,6 +1,7 @@
 import { ClearSearchParamsButton } from "@/components/buttons/ClearSearchParamsButton";
 import { RefreshButton } from "@/components/buttons/RefreshButton";
 import { ClosedPollsList } from "@/components/ClosedPollsList";
+import { NewPollDialog } from "@/components/dialogs/NewPollDialog";
 import { NoContent } from "@/components/Illustrations";
 import PollsTabsNavigation from "@/components/layout/PollsTabsNavigation";
 import { Loader } from "@/components/Loader";
@@ -58,15 +59,16 @@ const PollsPage = async ({
           <RefreshButton />
 
           {showNewPollButton && (
-            // TODO Add new poll dialog
-            <Button
-              variant={"ghost"}
-              className="bg-blue-100 text-primary hover:bg-blue-200 hover:text-primary"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              <span>New</span>
-              <span className="hidden lg:inline">Poll</span>
-            </Button>
+            <NewPollDialog eventId={event.id}>
+              <Button
+                variant={"ghost"}
+                className="bg-blue-100 text-primary hover:bg-blue-200 hover:text-primary"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                <span>New</span>
+                <span className="hidden lg:inline">Poll</span>
+              </Button>
+            </NewPollDialog>
           )}
         </div>
       </div>
@@ -129,7 +131,7 @@ const Polls = async ({
     return (
       <NoContent className="mt-10">
         <span className="tracking-tight font-light mt-3">
-          No active polls active right now!
+          No active polls right now!
         </span>
       </NoContent>
     );
@@ -139,7 +141,7 @@ const Polls = async ({
   return (
     <div className="mt-8 space-y-10">
       {polls.map((poll) => (
-        <LivePoll poll={poll} />
+        <LivePoll key={poll.id} poll={poll} />
       ))}
     </div>
   );

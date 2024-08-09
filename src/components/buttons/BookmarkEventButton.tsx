@@ -1,6 +1,7 @@
 "use client";
 
 import { useIsParticipantView } from "@/hooks/useIsParticipantView";
+import { bookmarkEventAction } from "@/lib/actions/bookmark-event-action";
 import { EventDetail } from "@/lib/prisma/validators/event-validators";
 import {
   RegisterLink,
@@ -8,6 +9,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs";
 import debounce from "lodash.debounce";
 import { Bookmark, BookmarkCheck } from "lucide-react";
+import { useAction } from "next-safe-action/hooks";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import {
@@ -28,6 +30,16 @@ export const BookmarkEventButton = ({ event }: Props) => {
   const isParticipantView = useIsParticipantView();
 
   const [isBookmarked, setIsBookmarked] = useState(false);
+
+  const { execute } = useAction(bookmarkEventAction, {
+    onError: (err) => {
+      console.error(err);
+
+      // revert the optimistic update
+      toggleClientBookmark();
+    },
+    onSuccess: () => console.log("Success bookmark!"),
+  });
 
   useEffect(() => {
     setIsBookmarked(
@@ -57,8 +69,7 @@ export const BookmarkEventButton = ({ event }: Props) => {
   const performBookmark = useCallback(
     debounce(
       () => {
-        //TODO implement me
-        console.log("bookmark performed!");
+        execute({ eventId: event.id });
       },
       1000,
       { leading: false, trailing: true }
