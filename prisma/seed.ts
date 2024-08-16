@@ -5,6 +5,7 @@ import colors from "tailwindcss/colors";
 
 const prisma = new PrismaClient();
 
+// NOTE: IMPORTANT to replace with an user id registered in Kinde
 const myUserId = "kp_4fc8a0fbaaf04a0abbeac48eaa501595";
 
 const runSeed = async () => {
