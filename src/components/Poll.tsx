@@ -2,7 +2,7 @@
 
 import { useIsParticipantView } from "@/hooks/useIsParticipantView";
 import { useLivePoll } from "@/hooks/usePoll";
-import { PollDetail } from "@/lib/prisma/validators/poll-validations";
+import { PollDetail } from "@/lib/prisma/validators/poll-validators";
 import { getOptionVotesAsPercentage } from "@/lib/utils/poll-util";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";

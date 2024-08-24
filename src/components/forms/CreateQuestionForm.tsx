@@ -1,5 +1,5 @@
 import { createQuestionAction } from "@/lib/actions/create-question-action";
-import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
+import { QuestionDetail } from "@/lib/prisma/validators/question-validators";
 import { cn } from "@/lib/utils/ui-utils";
 import { question } from "@/lib/validations/constants";
 import {

@@ -6,7 +6,7 @@ import { prisma } from "../prisma/client";
 import {
   questionDetail,
   questionsOrderBy,
-} from "../prisma/validators/question-validator";
+} from "../prisma/validators/question-validators";
 import { QuestionsOrderBy } from "../utils/question-utils";
 
 type Params = {

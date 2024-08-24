@@ -1,7 +1,7 @@
 "use client";
 
 import { useIsParticipantView } from "@/hooks/useIsParticipantView";
-import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
+import { QuestionDetail } from "@/lib/prisma/validators/question-validators";
 import { PropsWithClassName } from "@/lib/utils/ui-utils";
 import {
   CircleCheckBig,

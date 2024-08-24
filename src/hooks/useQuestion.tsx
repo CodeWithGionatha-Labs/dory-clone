@@ -1,7 +1,7 @@
 import { toast } from "@/components/ui/use-toast";
 import { updateQuestionAction } from "@/lib/actions/update-question-action";
 import { voteQuestionAction } from "@/lib/actions/vote-question-action";
-import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
+import { QuestionDetail } from "@/lib/prisma/validators/question-validators";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Question } from "@prisma/client";
 import debounce from "lodash.debounce";

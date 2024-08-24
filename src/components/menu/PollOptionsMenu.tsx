@@ -2,7 +2,7 @@
 
 import { DeletePollDialog } from "@/components/dialogs/DeletePollDialog";
 import { useIsParticipantView } from "@/hooks/useIsParticipantView";
-import { PollDetail } from "@/lib/prisma/validators/poll-validations";
+import { PollDetail } from "@/lib/prisma/validators/poll-validators";
 import { PropsWithClassName } from "@/lib/utils/ui-utils";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { EllipsisVertical, Trash } from "lucide-react";

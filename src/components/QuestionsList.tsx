@@ -2,7 +2,7 @@
 
 import { getEventOpenQuestionsAction } from "@/lib/actions/get-event-open-questions.action";
 import { getEventResolvedQuestionsAction } from "@/lib/actions/get-event-resolved-questions-action";
-import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
+import { QuestionDetail } from "@/lib/prisma/validators/question-validators";
 import { QuestionsOrderBy } from "@/lib/utils/question-utils";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { Event, User } from "@prisma/client";

@@ -2,7 +2,7 @@
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "../prisma/client";
-import { questionDetail } from "../prisma/validators/question-validator";
+import { questionDetail } from "../prisma/validators/question-validators";
 import { createQuestionSchema } from "../validations/question-schemas";
 import { actionClient } from "./safe-action";
 

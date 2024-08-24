@@ -1,7 +1,7 @@
 "use client";
 
 import { getEventClosedPollsAction } from "@/lib/actions/get-event-closed-polls-action";
-import { PollDetail } from "@/lib/prisma/validators/poll-validations";
+import { PollDetail } from "@/lib/prisma/validators/poll-validators";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import { Event, Poll, User } from "@prisma/client";
 import { useAction } from "next-safe-action/hooks";

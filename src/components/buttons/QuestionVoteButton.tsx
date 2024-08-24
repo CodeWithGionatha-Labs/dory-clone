@@ -1,7 +1,7 @@
 "use client";
 
 import { useVote } from "@/hooks/useQuestion";
-import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
+import { QuestionDetail } from "@/lib/prisma/validators/question-validators";
 import { cn, PropsWithClassName } from "@/lib/utils/ui-utils";
 import {
   RegisterLink,

@@ -5,7 +5,7 @@ import {
   useToggleResolved,
   useUpdateQuestionBody,
 } from "@/hooks/useQuestion";
-import { QuestionDetail } from "@/lib/prisma/validators/question-validator";
+import { QuestionDetail } from "@/lib/prisma/validators/question-validators";
 import { defaultDateFormatter } from "@/lib/utils/date-utils";
 import { cn } from "@/lib/utils/ui-utils";
 import { question as questionValidator } from "@/lib/validations/constants";

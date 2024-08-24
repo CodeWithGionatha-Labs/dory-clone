@@ -1,6 +1,6 @@
 import routes, { baseUrl } from "@/config/routes";
 import { votePollOptionAction } from "@/lib/actions/vote-poll-option-action";
-import { PollDetail } from "@/lib/prisma/validators/poll-validations";
+import { PollDetail } from "@/lib/prisma/validators/poll-validators";
 import { supabaseClient } from "@/lib/supabase/client";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { Poll, PollOption, User } from "@prisma/client";

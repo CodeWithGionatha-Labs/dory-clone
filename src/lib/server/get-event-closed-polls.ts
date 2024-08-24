@@ -2,7 +2,7 @@ import { Event, Poll, User } from "@prisma/client";
 import { cache } from "react";
 import "server-only";
 import { prisma } from "../prisma/client";
-import { pollDetail } from "../prisma/validators/poll-validations";
+import { pollDetail } from "../prisma/validators/poll-validators";
 
 type Params = {
   ownerId: User["id"];
