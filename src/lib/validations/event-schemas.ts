@@ -25,10 +25,10 @@ export const createEventSchema = z.object({
   title: z
     .string()
     .min(event.displayName.minLength, {
-      message: `Event title must have at least ${event.shortDescription.minLength} characters.`,
+      message: `Event title must have at least ${event.displayName.minLength} characters.`,
     })
     .max(event.displayName.maxLength, {
-      message: `Event title must not exceed ${event.shortDescription.maxLength} characters.`,
+      message: `Event title must not exceed ${event.displayName.maxLength} characters.`,
     }),
   shortDescription: shortDescriptionSchema,
 });
