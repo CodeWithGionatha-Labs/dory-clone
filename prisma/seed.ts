@@ -142,6 +142,7 @@ const runSeed = async () => {
 const resetDB = async () => {
   process.stdout.write("Resetting database...");
 
+  await prisma.notification.deleteMany();
   await prisma.event.deleteMany();
   await prisma.poll.deleteMany();
   await prisma.question.deleteMany();
